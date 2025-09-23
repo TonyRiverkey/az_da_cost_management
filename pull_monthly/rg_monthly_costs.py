@@ -135,7 +135,7 @@ def query_rg_costs_for_subscription(cm_client: CostManagementClient, subscriptio
 def main():
     ap = argparse.ArgumentParser(description="Pull last month's Azure cost per Resource Group.")
     ap.add_argument("--config", required=True, help="Path to config.yml")
-    ap.add_argument("--out", default=None, help="Output CSV path (default: ../outputs/costs_<YYYY-MM>.csv)")
+    ap.add_argument("--out", default=None, help="Output CSV path (default: ./outputs/costs_<YYYY-MM>.csv)")
     ap.add_argument("--sleep", type=float, default=1.0, help="Seconds to sleep between subscriptions")
     ap.add_argument("--maxretries", type=int, default=8, help="Max retries on 429/503")
     ap.add_argument("--clienttype", default="tony-cost-collector", help="ClientType header value")
@@ -150,7 +150,7 @@ def main():
     now_utc = dt.datetime.utcnow()
     start_iso, end_iso = previous_month_range(now_utc)
     month_label = start_iso[:7]  # YYYY-MM
-    out_path = Path(args.out) if args.out else Path("../outputs") / f"costs_{month_label}.csv"
+    out_path = Path(args.out) if args.out else Path("./outputs") / f"costs_{month_label}.csv"
 
     credential = build_credential()
     cm_client = CostManagementClient(credential=credential)
