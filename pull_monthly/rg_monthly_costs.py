@@ -158,6 +158,7 @@ def main():
     records = []
     for sub in targets:
         sub_id = sub["id"]
+        sub_name = sub.get("name") or sub.get("display_name") or sub_id
         wanted_rgs = [rg.lower() for rg in sub.get("resource_groups", [])]
         rg_costs = query_rg_costs_for_subscription(cm_client, sub_id, start_iso, end_iso, args.maxretries, args.clienttype)
 
@@ -166,6 +167,7 @@ def main():
             cost = rg_costs.get(rg, 0.0)
             records.append({
                 "subscription_id": sub_id,
+                "subscription_name": sub_name,
                 "resource_group": rg,
                 "start": start_iso,
                 "end": end_iso,
@@ -176,7 +178,17 @@ def main():
     # Write CSV
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with out_path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["subscription_id", "resource_group", "start", "end", "total_cost"])
+        writer = csv.DictWriter(
+            f,
+            fieldnames=[
+                "subscription_id",
+                "subscription_name",
+                "resource_group",
+                "start",
+                "end",
+                "total_cost",
+            ],
+        )
         writer.writeheader()
         writer.writerows(records)
 
