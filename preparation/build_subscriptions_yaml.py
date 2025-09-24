@@ -190,23 +190,33 @@ def main():
     credential = get_credential(args.tenant_id)
     name_to_id, id_to_name = build_subscription_index(credential, args.tenant_id)
 
-    agg: Dict[str, set] = defaultdict(set)
+    # aggregate
+    agg_rgs: Dict[str, set] = defaultdict(set)
+    agg_name: Dict[str, str] = {}
 
     for sub_raw, rg in rows:
         sid = resolve_subscription_id(sub_raw, name_to_id, id_to_name)
         if not sid:
             continue
-        agg[sid].add(rg)
+        agg_rgs[sid].add(rg)
 
-    if not agg:
+        # prefer Azure’s display name; otherwise use CSV’s display name when not a GUID
+        chosen_name = id_to_name.get(sid)
+        if not chosen_name and not GUID_RE.match(sub_raw):
+            chosen_name = sub_raw.strip()
+        if chosen_name:
+            agg_name.setdefault(sid, chosen_name)
+
+    if not agg_rgs:
         print("No subscriptions resolved to IDs. Exiting.", file=sys.stderr)
         sys.exit(1)
 
-    # Shape the YAML exactly as requested
+    # Shape the YAML
     out_doc = {
         "subscriptions": [
-            {"id": sid, "resource_groups": sorted(list(rgs))}
-            for sid, rgs in sorted(agg.items(), key=lambda kv: kv[0].lower())
+            {"id": sid, "name": agg_name.get(sid, id_to_name.get(sid, "")),
+            "resource_groups": sorted(list(rgs))}
+            for sid, rgs in sorted(agg_rgs.items(), key=lambda kv: kv[0].lower())
         ]
     }
 

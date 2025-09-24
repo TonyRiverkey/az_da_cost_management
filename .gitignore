@@ -1,0 +1,3 @@
+# Ignore CSVs under any folder named outputs, anywhere
+**/outputs/*.csv
+**/outputs/**/*.csv

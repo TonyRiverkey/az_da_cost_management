@@ -1,5 +1,16 @@
 subscriptions:
+- id: 01e846e5-26ac-476e-a3eb-47a953734c02
+  name: sub-gal-apps-dev
+  resource_groups:
+  - NetworkWatcherRG
+  - ai_appi-gal-apps-dev-b54d_47be4721-9a9f-465a-b6f9-f6d3560a63aa_managed
+  - managed-rg-gal-apps-dev-cus-01
+  - rg-gal-apps-dev-cus-967e
+  - rg-gal-apps-marketplace-dev-cus-d69e
+  - rg-gal-apps-portal-dev-cus-03c9
+  - rg-gal-apps-portal-dev-dev-cus-2106
 - id: 160e39bb-db42-463e-8572-5434b514ee98
+  name: prod
   resource_groups:
   - NetworkWatcherRG
   - rg-platform-ops-prod-cus-001
@@ -7,6 +18,7 @@ subscriptions:
   - rg-trail-boa-prod-cus-001
   - rg-trail-poa-prod-cus-001
 - id: 271403aa-09dc-4f66-a989-1d12524035d5
+  name: sub-lha-data-prod
   resource_groups:
   - NetworkWatcherRG
   - ai_appi-lha-data-application-insights-prod-_d04cb0da-b9a9-4b92-9c40-02e2670d722b_managed
@@ -30,15 +42,18 @@ subscriptions:
   - rg-lha-data-sic-graphs-prod-cus-7dcb
   - rg-lha-data-tire-temperature-prod-cus-09b4
 - id: 33a2e532-d6b2-4212-838e-c5f8a7f3d1d6
+  name: sub-com-excellence-prod
   resource_groups:
   - NetworkWatcherRG
   - managed-rg-com-excellence-prod-cus-01
   - rg-com-excellence-prod-cus-2990
 - id: 372de65c-0928-4d94-b3b1-5aed45dbc84f
+  name: Enterprise
   resource_groups:
   - CDA_POC
   - Trail_POC
 - id: 37f9c7b2-2083-4de5-861d-c43ab2c6771a
+  name: sub-gal-data-dev
   resource_groups:
   - NetworkWatcherRG
   - managed-rg-gal-data-dev-cus-01
@@ -46,17 +61,30 @@ subscriptions:
   - rg-gal-data-airflow-factory-dev-cus-f267
   - rg-gal-data-dev-cus-02f2
   - rg-lha-airflow-dev-cus-abaa
+- id: 504e074c-40bd-4980-bfb9-7feaa20c4b78
+  name: sub-galplatform-prod
+  resource_groups:
+  - NetworkWatcherRG
+  - ai_appi-galplatform-message-service-prod-79_680fd48a-e1c0-4d85-b6c0-9ee7ef63e9d2_managed
+  - managed-rg-galplatform-prod-cus-01
+  - rg-galplatform-grafana-prod-cus-b3ae
+  - rg-galplatform-grafana-service-prod-wus3-d4b4
+  - rg-galplatform-message-service-prod-cus-156c
+  - rg-galplatform-prod-cus-e512
 - id: 522c90dc-386e-4bce-87f6-88d7610b39b6
+  name: sub-dab-dabo-qa
   resource_groups:
   - NetworkWatcherRG
   - managed-rg-dab-dabo-qa-cus-01
   - rg-dab-dabo-qa-cus-cdd5
 - id: 5b564a68-21d4-4c64-9079-8d6cb2902c77
+  name: sub-com-excellence-dev
   resource_groups:
   - NetworkWatcherRG
   - managed-rg-com-excellence-dev-cus-01
   - rg-com-excellence-dev-cus-444c
 - id: 5f43eee7-6de7-4a70-be2f-41fc34519127
+  name: sub-pro-dev
   resource_groups:
   - NetworkWatcherRG
   - ai_appi-pro-hvc-master-gen-adf-orchestratio_f66b9eee-412d-41d9-83fa-82b65fdd3a6c_managed
@@ -75,6 +103,7 @@ subscriptions:
   - rg-pro-smplus-dev-cus-cd21
   - synapseworkspace-managedrg-99c43aa1-186c-4a52-9811-adce0ae4f570
 - id: 5f66cf63-a585-4f86-8de1-9e76610b255b
+  name: sub-gal-dbaas-qa
   resource_groups:
   - NetworkWatcherRG
   - managed-rg-gal-dbaas-qa-cus-01
@@ -89,6 +118,7 @@ subscriptions:
   - rg-lha-qa-cus-fa38
   - rg-tdw-storage-qa-cus-3343
 - id: 6c3ec015-c3bb-4a1c-9874-d6913c5acdb2
+  name: sub-aks-hub-dev
   resource_groups:
   - NetworkWatcherRG
   - aks-hub-aks-dev
@@ -97,7 +127,17 @@ subscriptions:
   - rg-aks-hub-dev-cus-6195
   - rg-aks-hub-gitops-connector-dev-cus-098c
   - rg-aks-hub-storage-dev
+- id: 74c39431-23e2-4296-8e6e-ea99e184e49a
+  name: sub-gal-apps-prod
+  resource_groups:
+  - NetworkWatcherRG
+  - ai_appi-gal-apps-prod-9fa3_dfd1819e-9d88-4b35-8203-23a8a6cf0f9d_managed
+  - managed-rg-gal-apps-prod-cus-01
+  - rg-gal-apps-marketplace-prod-cus-cb28
+  - rg-gal-apps-portal-prod-cus-efc0
+  - rg-gal-apps-prod-cus-3db7
 - id: 8c11859c-c5a5-4911-b353-fadfbccce83f
+  name: dev
   resource_groups:
   - NetworkWatcherRG
   - ai_appi-rdo-mill-dd-dev-cus-001_8aeda356-8c1f-494e-8368-b4020375e19a_managed
@@ -107,6 +147,7 @@ subscriptions:
   - rg-trail-poa-dbw-dev-cus-001
   - rg-trail-poa-dev-cus-001
 - id: 904fa44c-85e5-4dfd-91d7-fde9b91ee641
+  name: sub-gal-dbaas-dev
   resource_groups:
   - NetworkWatcherRG
   - managed-rg-gal-dbaas-dev-cus-01
@@ -129,6 +170,7 @@ subscriptions:
   - rg-tdw-storage-dev-cus-9d50
   - rg-wrk-dev-cus-f276
 - id: a100aad5-f3dd-4c98-8876-2650859711aa
+  name: sub-gal-data-prod
   resource_groups:
   - NetworkWatcherRG
   - managed-rg-gal-data-prod-cus-01
@@ -137,12 +179,14 @@ subscriptions:
   - rg-gal-data-prod-cus-9d69
   - rg-lha-airflow-prod-cus-fa89
 - id: a6ed3e67-f246-458a-892b-2ff7075eab28
+  name: qa
   resource_groups:
   - NetworkWatcherRG
   - rg-cda-qa-cus-001
   - rg-rdo-mill-qa-cus-001
   - rg-trail-boa-qa-cus-001
 - id: aaab746d-c0b5-4040-a04f-5aadadaf6306
+  name: sub-lha-data-dev
   resource_groups:
   - NetworkWatcherRG
   - ai_appi-lha-data-application-insights-dev-c_589a4ad3-789c-4c05-b278-22ef2194637e_managed
@@ -167,16 +211,30 @@ subscriptions:
   - rg-lha-data-tire-temperature-dev-cus-d1aa
   - rg-lha-data-totalbcm-dev-cus-9e41
 - id: b1dfa277-1efd-425b-8afd-6b430c6450fd
+  name: sub-dab-dabo-prod
   resource_groups:
   - NetworkWatcherRG
   - managed-rg-dab-dabo-prod-cus-01
   - rg-dab-dabo-prod-cus-1b23
+- id: b5a0ce68-4709-4e0d-b17b-f67d89b538f6
+  name: sub-galplatform-dev
+  resource_groups:
+  - NetworkWatcherRG
+  - ai_appi-galplatform-dev-439f_7167000a-2c6c-4641-9ff7-4f7120ccd17c_managed
+  - ai_appi-galplatform-message-service-dev-49e_870c6cd9-4aea-429c-809e-45fff1b2d189_managed
+  - managed-rg-galplatform-dev-cus-01
+  - rg-galplatform-dev-cus-e838
+  - rg-galplatform-grafana-dev-cus-f8a4
+  - rg-galplatform-grafana-service-dev-wus3-d7ca
+  - rg-galplatform-message-service-dev-cus-eb84
 - id: b8ad9a9b-90ab-4f13-9a88-695f8c04b200
+  name: sub-com-excellence-uat
   resource_groups:
   - NetworkWatcherRG
   - managed-rg-com-excellence-uat-cus-01
   - rg-com-excellence-uat-cus-3940
 - id: bc2adfbb-5864-465d-8959-1e595b3c75cb
+  name: sub-aks-hub-prod
   resource_groups:
   - NetworkWatcherRG
   - aks-hub-aks-prod
@@ -187,6 +245,7 @@ subscriptions:
   - rg-aks-hub-prod-cus-2649
   - rg-aks-hub-storage-prod
 - id: c532f1e3-5fa0-4ac4-b6b9-9bf3b43a8d73
+  name: sub-api-hub-dev
   resource_groups:
   - NetworkWatcherRG
   - ai_appi-api-hub-dev_acb3d826-4477-458b-b7ee-6ed428ee27b8_managed
@@ -196,6 +255,7 @@ subscriptions:
   - rg-api-hub-dev-cus-8448
   - rg-api-hub-dev-cus-8bac
 - id: d8f1ed85-9128-4c14-91b5-b3375f71ebdb
+  name: sub-api-hub-prod
   resource_groups:
   - LogAnalyticsDefaultResources
   - NetworkWatcherRG
@@ -206,6 +266,7 @@ subscriptions:
   - rg-api-hub-prod-cus-a73b
   - rg-api-hub-prod-cus-fb94
 - id: da944a68-772d-484a-bdd4-c0488479313f
+  name: sub-pro-prod
   resource_groups:
   - NetworkWatcherRG
   - ai_appi-pro-hvc-master-gen-adf-orchestratio_3dc58ea5-9837-4877-b353-c4b381f86b4c_managed
@@ -231,6 +292,7 @@ subscriptions:
   - rg-pro-smplus-prod-cus-e9bd
   - synapseworkspace-managedrg-4c2d04fe-c4d1-4275-943e-3c7f9e082b3d
 - id: e5167103-093f-4854-813e-52d4ca95cff5
+  name: sub-gal-dbaas-uat
   resource_groups:
   - NetworkWatcherRG
   - managed-rg-gal-dbaas-uat-cus-01
@@ -246,6 +308,7 @@ subscriptions:
   - rg-obk-uat-cus-f0d2
   - rg-tdw-storage-uat-cus-2b72
 - id: e75cc334-ebfd-47a0-90d4-f2bc12ace1c9
+  name: sub-aks-hub-uat
   resource_groups:
   - NetworkWatcherRG
   - aks-hub-aks-uat
@@ -255,6 +318,7 @@ subscriptions:
   - rg-aks-hub-storage-uat
   - rg-aks-hub-uat-cus-6b10
 - id: f908573f-1142-4b3c-9709-db20a7e148f8
+  name: sub-gal-dbaas-prod
   resource_groups:
   - NetworkWatcherRG
   - managed-rg-gal-dbaas-prod-cus-01

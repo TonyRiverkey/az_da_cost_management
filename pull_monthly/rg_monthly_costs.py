@@ -73,13 +73,16 @@ def build_credential():
     )
 
 def previous_month_range(now_utc: dt.datetime) -> tuple[str, str]:
+    """
+    Returns (start_iso, end_iso) for the *previous* calendar month where:
+      - start is 00:00:00Z on the 1st of the previous month
+      - end is 23:59:59Z on the *last* day of the previous month (inclusive)
+    This avoids accidentally including the 1st day of the current month.
+    """
     first_of_this_month = now_utc.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    last_month_end = first_of_this_month
-    # go to first day of previous month
-    prev_month_last_day = last_month_end - dt.timedelta(days=1)
-    first_of_prev_month = prev_month_last_day.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    # ISO 8601 Z format
-    return first_of_prev_month.isoformat() + "Z", last_month_end.isoformat() + "Z"
+    prev_month_end = first_of_this_month - dt.timedelta(seconds=1)
+    first_of_prev_month = prev_month_end.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    return first_of_prev_month.isoformat() + "Z", prev_month_end.isoformat() + "Z"
 
 def load_config(path: Path) -> dict:
     with path.open("r", encoding="utf-8") as f:
@@ -139,6 +142,7 @@ def main():
     ap.add_argument("--sleep", type=float, default=1.0, help="Seconds to sleep between subscriptions")
     ap.add_argument("--maxretries", type=int, default=8, help="Max retries on 429/503")
     ap.add_argument("--clienttype", default="tony-cost-collector", help="ClientType header value")
+    ap.add_argument("--month", type=str, default=None, help="Month to pull in YYYY-MM format (default: previous month)")
     args = ap.parse_args()
 
     cfg = load_config(Path(args.config))
@@ -147,9 +151,27 @@ def main():
         print("No subscriptions in config.", file=sys.stderr)
         sys.exit(2)
 
-    now_utc = dt.datetime.utcnow()
-    start_iso, end_iso = previous_month_range(now_utc)
-    month_label = start_iso[:7]  # YYYY-MM
+    if args.month:
+        # Parse YYYY-MM and get start/end iso strings
+        try:
+            year, month = map(int, args.month.split("-"))
+            first_of_month = dt.datetime(year, month, 1, 0, 0, 0)
+            if month == 12:
+                first_of_next_month = dt.datetime(year + 1, 1, 1, 0, 0, 0)
+            else:
+                first_of_next_month = dt.datetime(year, month + 1, 1, 0, 0, 0)
+            end_of_month = first_of_next_month - dt.timedelta(seconds=1)
+            start_iso = first_of_month.isoformat() + "Z"
+            end_iso = end_of_month.isoformat() + "Z"
+            month_label = args.month
+        except Exception as e:
+            print(f"Invalid --month format: {args.month}. Use YYYY-MM.", file=sys.stderr)
+            sys.exit(3)
+    else:
+        now_utc = dt.datetime.utcnow()
+        start_iso, end_iso = previous_month_range(now_utc)
+        month_label = start_iso[:7]  # YYYY-MM
+
     out_path = Path(args.out) if args.out else Path("./outputs") / f"costs_{month_label}.csv"
 
     credential = build_credential()
